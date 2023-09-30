@@ -1,4 +1,4 @@
-import { Box, Button, Modal, TextField } from '@mui/material';
+import { Box, Modal, TextField } from '@mui/material';
 import st from './ManageWallets.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { set } from '../../redux/inputSlice';

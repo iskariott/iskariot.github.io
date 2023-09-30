@@ -1,4 +1,3 @@
-import { Button } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import ManageWallets from './components/ManageWallets/ManageWallets';
@@ -10,16 +9,19 @@ import StButton from './components/StButton/StButton';
 function App() {
   const [isModalOpen, setModal] = useState(false);
   const [tableRows, setTableRows] = useState([]);
+  const [loading, setLoading] = useState(false);
   const inputData = useSelector((state) => state.red.input.data);
 
   useEffect(() => {
     (async () => {
+      if (!inputData) return;
       setTableRows([]);
+      setLoading(true);
       const respInp = await getWalletData(inputData);
       if (!respInp) return;
       setTableRows(respInp);
+      setLoading(false);
     })();
-    console.log('update');
   }, [inputData]);
 
   return (
@@ -28,7 +30,7 @@ function App() {
         manage wallets
       </StButton>
       <ManageWallets isModalOpen={isModalOpen} setModal={setModal} setTableRows={setTableRows} />
-      <WalletsTable rows={tableRows} />
+      <WalletsTable rows={tableRows} loading={loading} />
     </div>
   );
 }

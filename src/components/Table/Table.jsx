@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -7,7 +6,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { Columns } from '../../utils/constants';
-import { Box, Button, Collapse } from '@mui/material';
+import { Button } from '@mui/material';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { v4 as uuidv4 } from 'uuid';
 import Loader from '../Loader/Loader';
@@ -127,7 +126,7 @@ function Row({ row }) {
   );
 }
 
-export default function WalletsTable({ rows }) {
+export default function WalletsTable({ rows, loading }) {
   const inputData = useSelector((state) => state.red.input.data);
 
   return (
@@ -156,7 +155,7 @@ export default function WalletsTable({ rows }) {
           </TableBody>
         </Table>
       </TableContainer>
-      {rows.length && inputData ? <></> : <Loader />}
+      {!loading ? <></> : <Loader />}
     </div>
   );
 }
