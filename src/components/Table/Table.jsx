@@ -17,7 +17,6 @@ function Row({ row }) {
   const [showRowData, setShowRowData] = useState(false);
   const [update, setUpdate] = useState(false);
   if (update) {
-    console.log('upfate');
     (async () => {
       // TODO
       setUpdate(false);
@@ -39,13 +38,16 @@ function Row({ row }) {
           );
         })}
       </TableRow>
-
-      <AdditInfo
-        collapseData={row.collapse}
-        show={showRowData}
-        update={update}
-        setUpdate={setUpdate}
-      />
+      {row.result === 'error' ? (
+        <></>
+      ) : (
+        <AdditInfo
+          collapseData={row.collapse}
+          show={showRowData}
+          update={update}
+          setUpdate={setUpdate}
+        />
+      )}
     </>
   );
 }

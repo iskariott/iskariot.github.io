@@ -61,8 +61,8 @@ export const Columns = [
     align: 'center',
   },
   {
-    id: 'currActWeeks',
-    label: 'WTM',
+    id: 'witm',
+    label: 'WiTM',
     hint: 'Active weeks in this month',
     align: 'center',
   },

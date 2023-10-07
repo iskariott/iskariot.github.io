@@ -50,17 +50,21 @@ export default async function getStark(address) {
       activity,
       bridge,
       volume,
+      witm: '1',
       transactions: gropuedTransasctions,
     };
     return data;
   } catch (e) {
     data = {
-      balance: '-',
+      balance: { tokens: '-', total: '-' },
       tx: '-',
       fee: '-',
-      activity: '-',
+      activity: { monthActivity: '-', weekActivity: '-', dayActivity: '-', contractActivity: '-' },
       bridge: '-',
       volume: '-',
+      transactions: [],
+      witm: '-',
+      result: 'error',
     };
     return data;
   }

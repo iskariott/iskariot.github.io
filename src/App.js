@@ -12,9 +12,10 @@ function App() {
   const input = useSelector((state) => state.red.input.data);
 
   const formatInputData = (input) => {
-    return input.split(/\r?\n/).map((itm) => {
+    return input.split(/\r?\n/).flatMap((itm) => {
       const tmp = itm.split(' ');
-      return { label: tmp[0], address: tmp[1] };
+      if (tmp[0].slice(0, 2) === '0x') return { label: '', address: tmp[0] };
+      else return { label: tmp[0], address: tmp[1] };
     });
   };
 
@@ -38,12 +39,13 @@ function App() {
             fee: resp.fee,
             contract: resp.activity.contractActivity,
             mwd: `${resp.activity.monthActivity}/${resp.activity.weekActivity}/${resp.activity.dayActivity}`,
-            currActWeeks: '1',
+            witm: resp.witm,
             collapse: {
               address: formatedInput[i].address,
               balance: resp.balance.tokens,
               transactions: resp.transactions,
             },
+            result: resp.result,
           },
         ]);
       }
