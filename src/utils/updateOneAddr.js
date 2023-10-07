@@ -1,5 +1,5 @@
 import getStark from '.';
-import { setTable, updateTable } from '../redux/tableSlice';
+import { updateTable } from '../redux/tableSlice';
 
 export default async function updateOneAddr(dispatch, address, label, id) {
   const resp = await getStark(address);

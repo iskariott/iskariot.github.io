@@ -34,7 +34,6 @@ function groupByDate(transactions) {
 }
 
 export default async function getStark(address) {
-  let data;
   try {
     const tokensPrice = await getTokenPrice();
 
@@ -46,7 +45,8 @@ export default async function getStark(address) {
     const bridge = getBridge(transfers, tokensPrice.starkgate);
     const volume = getVolume(transactions);
     const gropuedTransasctions = groupByDate(transactions);
-    data = {
+
+    return {
       balance,
       tx,
       fee,
@@ -56,9 +56,8 @@ export default async function getStark(address) {
       witm: witm,
       transactions: gropuedTransasctions,
     };
-    return data;
   } catch (e) {
-    data = {
+    return {
       balance: { tokens: '-', total: '-' },
       tx: '-',
       fee: '-',
@@ -69,6 +68,5 @@ export default async function getStark(address) {
       witm: '-',
       result: 'error',
     };
-    return data;
   }
 }

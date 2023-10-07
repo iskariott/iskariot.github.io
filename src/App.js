@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ManageWallets from './components/ManageWallets/ManageWallets';
 import WalletsTable from './components/Table/Table';
@@ -8,7 +8,6 @@ import updateData from './utils/updateData';
 
 function App() {
   const [isModalOpen, setModal] = useState(false);
-  const [tableRows, setTableRows] = useState([]);
   const input = useSelector((state) => state.red.input.data);
   const dispatch = useDispatch();
 
@@ -21,7 +20,7 @@ function App() {
         update
       </StButton>
       <ManageWallets isModalOpen={isModalOpen} setModal={setModal} />
-      <WalletsTable rows={tableRows} loadingData={false} />
+      <WalletsTable />
     </div>
   );
 }
