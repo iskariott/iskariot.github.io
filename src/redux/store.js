@@ -1,6 +1,7 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { persistStore, persistReducer } from 'redux-persist';
 import input from './inputSlice';
+import table from './tableSlice';
 import storage from 'redux-persist/lib/storage';
 
 const persistConfig = {
@@ -8,7 +9,7 @@ const persistConfig = {
   storage,
 };
 
-const rootReducer = combineReducers({ input });
+const rootReducer = combineReducers({ input, table });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 // const middleware = [thunk];
 

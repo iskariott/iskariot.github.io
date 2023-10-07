@@ -1,9 +1,11 @@
 import { Button } from '@mui/material';
-import st from './StButton.module.scss';
 
 export default function StButton(props) {
   return (
-    <Button variant="contained" {...props} className={st.btn}>
+    <Button
+      variant="contained"
+      onClick={props.onClick}
+      sx={{ ...props.sx, bgcolor: '#1a2229', ':hover': { bgcolor: '#202a33' } }}>
       {props.children}
     </Button>
   );

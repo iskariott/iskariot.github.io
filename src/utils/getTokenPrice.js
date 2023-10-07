@@ -1,12 +1,22 @@
 import axios from 'axios';
 
-export default async function getTokenPrice(token) {
-  const url = `https://api.coingecko.com/api/v3/simple/price?ids=${token}&vs_currencies=usd`;
+export default async function getTokenPrice() {
+  const url = `https://api.coingecko.com/api/v3/simple/price?ids=ethereum,wrapped-bitcoin&vs_currencies=usd`;
   try {
     const response = await axios.get(url);
-    return response.data[token].usd;
-  } catch (error) {
-    console.error('Error fetching token prices:', error.message);
-    return null;
+    return {
+      eth: response.data['ethereum'].usd,
+      wbtc: response.data['wrapped-bitcoin'].usd,
+      starkgate: {
+        'StarkGate: ETH': response.data['ethereum'].usd,
+        'StarkGate: USDT': 1,
+        'StarkGate: USDC': 1,
+        'StarkGate: DAI': 1,
+        'StarkGate: WBTC': response.data['wrapped-bitcoin'].usd,
+      },
+    };
+  } catch (e) {
+    console.error('getTokenPrice error:', e.message);
+    throw e;
   }
 }

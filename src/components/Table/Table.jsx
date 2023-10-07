@@ -6,129 +6,51 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { Columns } from '../../utils/constants';
-import { Button } from '@mui/material';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import { Tooltip } from '@mui/material';
 import { v4 as uuidv4 } from 'uuid';
 import Loader from '../Loader/Loader';
-import { useSelector } from 'react-redux';
-
-// const rows = [
-//   {
-//     number: '1',
-//     label: 'asdasd',
-//     balance: '123',
-//     offbridge: 'yes',
-//     volume: '123',
-//     txs: '15',
-//     mwd: '1-2-4',
-//     currActWeeks: '1',
-//   },
-//   {
-//     number: '2',
-//     label: 'asdasd',
-//     balance: '123',
-//     offbridge: 'yes',
-//     volume: '123',
-//     txs: '15',
-//     mwd: '1-2-4',
-//     currActWeeks: '1',
-//   },
-//   {
-//     number: '3',
-//     label: 'asdasd',
-//     balance: '123',
-//     offbridge: 'yes',
-//     volume: '123',
-//     txs: '15',
-//     mwd: '1-2-4',
-//     currActWeeks: '1',
-//   },
-//   {
-//     number: '4',
-//     label: 'asdasd',
-//     balance: '123',
-//     offbridge: 'yes',
-//     volume: '123',
-//     txs: '15',
-//     mwd: '1-2-4',
-//     currActWeeks: '1',
-//   },
-//   {
-//     number: '',
-//     label: 'asdasd',
-//     balance: '123',
-//     offbridge: 'yes',
-//     volume: '123',
-//     txs: '15',
-//     mwd: '1-2-4',
-//     currActWeeks: '1',
-//   },
-//   {
-//     number: '',
-//     label: 'asdasd',
-//     balance: '123',
-//     offbridge: 'yes',
-//     volume: '123',
-//     txs: '15',
-//     mwd: '1-2-4',
-//     currActWeeks: '1',
-//   },
-//   {
-//     number: '',
-//     label: 'asdasd',
-//     balance: '123',
-//     offbridge: 'yes',
-//     volume: '123',
-//     txs: '15',
-//     mwd: '1-2-4',
-//     currActWeeks: '1',
-//   },
-//   {
-//     number: '',
-//     label: 'asdasd',
-//     balance: '123',
-//     offbridge: 'yes',
-//     volume: '123',
-//     txs: '15',
-//     mwd: '1-2-4',
-//     currActWeeks: '1',
-//   },
-// ];
+import AdditInfo from './AdditInfo';
+import st from './Table.module.scss';
+import { useState } from 'react';
 
 function Row({ row }) {
-  const [show, setShow] = React.useState(false);
+  const [showRowData, setShowRowData] = useState(false);
+  const [update, setUpdate] = useState(false);
+  if (update) {
+    console.log('upfate');
+    (async () => {
+      // TODO
+      setUpdate(false);
+    })();
+  }
+
   return (
     <>
-      <TableRow tabIndex={-1}>
+      <TableRow tabIndex={-1} className={st.row} onClick={() => setShowRowData(!showRowData)}>
         {Columns.map((column) => {
           let value = row[column.id];
-          if ('details' === column.id)
-            value = (
-              <Button sx={{ minWidth: '5px' }} onClick={() => setShow(!show)} color={'primary'}>
-                <ArrowDropDownIcon />
-              </Button>
-            );
           return (
             <TableCell
               key={uuidv4()}
               align={column.align}
-              sx={{ color: 'rgb(196, 192, 192)', border: '1px solid #272626' }}>
+              sx={{ color: '#c4c0c0', border: '1px solid #272626' }}>
               {value}
             </TableCell>
           );
         })}
       </TableRow>
 
-      {/* <Collapse in={show} timeout="auto" unmountOnExit>
-        фівфі
-      </Collapse> */}
+      <AdditInfo
+        collapseData={row.collapse}
+        show={showRowData}
+        update={update}
+        setUpdate={setUpdate}
+      />
     </>
   );
 }
 
-export default function WalletsTable({ rows, loading }) {
-  const inputData = useSelector((state) => state.red.input.data);
-
+export default function WalletsTable({ rows }) {
   return (
     <div>
       <TableContainer sx={{ maxHeight: '90vh' }}>
@@ -137,13 +59,15 @@ export default function WalletsTable({ rows, loading }) {
             <TableRow>
               {Columns.map((column) => {
                 return (
-                  <TableCell
-                    sx={{ background: '#2c2c2c', color: 'grey', border: '1px solid #1e1e1e' }}
-                    key={uuidv4()}
-                    align={column.align}
-                    style={{ minWidth: column.minWidth, width: column.width }}>
-                    {column.label}
-                  </TableCell>
+                  <Tooltip title={column.hint ? column.hint : ''} key={uuidv4()}>
+                    <TableCell
+                      sx={{ background: '#2c2c2c', color: 'grey', border: '1px solid #1e1e1e' }}
+                      className={st.tableHead}
+                      align={column.align}
+                      style={{ minWidth: column.minWidth, width: column.width }}>
+                      {column.label}
+                    </TableCell>
+                  </Tooltip>
                 );
               })}
             </TableRow>
@@ -155,7 +79,7 @@ export default function WalletsTable({ rows, loading }) {
           </TableBody>
         </Table>
       </TableContainer>
-      {!loading ? <></> : <Loader />}
+      {/* {!loadingData.loading ? <></> : <Loader loadingData={loadingData} />} */}
     </div>
   );
 }
