@@ -4,20 +4,23 @@ import { useDispatch, useSelector } from 'react-redux';
 import { set } from '../../redux/inputSlice';
 import { useEffect, useState } from 'react';
 import StButton from '../StButton/StButton';
+import updateData from '../../utils/updateData';
 
 export default function ManageWallets(props) {
   const { isModalOpen, setModal } = props;
   const [inputData, setInputData] = useState('');
   const dispatch = useDispatch();
   const storedInputData = useSelector((state) => state.red.input.data);
+  const storedTableData = useSelector((state) => state.red.table.data);
 
   useEffect(() => {
     setInputData(storedInputData);
   }, []);
 
-  const onClickConfirmBtn = async (e) => {
+  const onClickConfirmBtn = async () => {
     setModal(false);
     if (!inputData) return;
+    updateData(dispatch, inputData);
     dispatch(set(inputData));
   };
 

@@ -8,17 +8,19 @@ import TableRow from '@mui/material/TableRow';
 import { Columns } from '../../utils/constants';
 import { Tooltip } from '@mui/material';
 import { v4 as uuidv4 } from 'uuid';
-import Loader from '../Loader/Loader';
 import AdditInfo from './AdditInfo';
 import st from './Table.module.scss';
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import updateOneAddr from '../../utils/updateOneAddr';
 
 function Row({ row }) {
   const [showRowData, setShowRowData] = useState(false);
   const [update, setUpdate] = useState(false);
+  const dispatch = useDispatch();
   if (update) {
     (async () => {
-      // TODO
+      await updateOneAddr(dispatch, row.collapse.address, row.label, row.number);
       setUpdate(false);
     })();
   }
@@ -52,7 +54,8 @@ function Row({ row }) {
   );
 }
 
-export default function WalletsTable({ rows }) {
+export default function WalletsTable() {
+  const rows = useSelector((state) => state.red.table.data);
   return (
     <div>
       <TableContainer sx={{ maxHeight: '90vh' }}>
