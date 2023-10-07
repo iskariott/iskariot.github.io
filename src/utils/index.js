@@ -6,6 +6,7 @@ import getBridge from './getBridge.js';
 import getVolume from './getVolume.js';
 import getTokenPrice from './getTokenPrice.js';
 import { Months } from './constants.js';
+import getWeeksInThisMonth from './getWeeksInThisMonth.js';
 
 function groupByDate(transactions) {
   const grouped = transactions.reduce((result, obj) => {
@@ -36,7 +37,9 @@ export default async function getStark(address) {
   let data;
   try {
     const tokensPrice = await getTokenPrice();
+
     const { transactions, transfers } = await getTransactions(address, tokensPrice.starkgate);
+    const witm = getWeeksInThisMonth(transactions);
     const activity = getActivity(address, transactions);
     const { tx, fee } = getTxAndFee(transactions, tokensPrice.eth);
     const balance = await getBalance(address, tokensPrice);
@@ -50,7 +53,7 @@ export default async function getStark(address) {
       activity,
       bridge,
       volume,
-      witm: '1',
+      witm: witm,
       transactions: gropuedTransasctions,
     };
     return data;
