@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ManageWallets from './components/ManageWallets/ManageWallets';
 import WalletsTable from './components/Table/Table';
@@ -12,6 +12,16 @@ function App() {
   const [isModalOpen, setModal] = useState(false);
   const input = useSelector((state) => state.red.input.data);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const currentVersion = '1.0';
+
+    const storedVersion = localStorage.getItem('ver');
+    if (storedVersion !== currentVersion) {
+      localStorage.clear();
+      localStorage.setItem('ver', currentVersion);
+    }
+  }, []);
 
   return (
     <div className="App">
