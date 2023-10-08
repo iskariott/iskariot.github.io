@@ -3,13 +3,12 @@ import Table from '@mui/material/Table';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import { Badge, Box, Collapse } from '@mui/material';
+import { Box, Collapse } from '@mui/material';
 import { v4 as uuidv4 } from 'uuid';
 import StButton from '../StButton/StButton';
 import ContractAvatar from '../ContractAvatar/ContractAvatar';
 
 export default function AdditInfo({ show, collapseData, setUpdate }) {
-  console.log('collapseData = ', collapseData);
   return (
     <TableRow>
       <TableCell

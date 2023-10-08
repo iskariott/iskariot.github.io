@@ -16,8 +16,6 @@ export default async function updateData(dispatch, input) {
   const formatedInput = formatInputData(input);
   for (let i = 0; i < formatedInput.length; i++) {
     const resp = await getStark(formatedInput[i].address);
-    console.log('resp = ', resp);
-    console.log(resp.domain);
     const data = getTableObject(
       i + 1,
       formatedInput[i].label,
@@ -34,7 +32,6 @@ export default async function updateData(dispatch, input) {
       resp.contracts,
       resp.result,
     );
-    console.log('data = ', data);
     dispatch(setTable(data));
   }
 }

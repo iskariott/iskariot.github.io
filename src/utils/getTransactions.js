@@ -38,7 +38,6 @@ const getContractNames = (transactions, ethPrice) => {
       contracts[idx].count += 1;
     }
   });
-  console.log('domain = ', domain);
   return { contracts, domain };
 };
 
@@ -105,7 +104,6 @@ export default async function getTransactions(address, prices) {
     }
 
     const { contracts, domain } = getContractNames(allTransactions, prices['StarkGate: ETH']);
-    console.log('domain = ', domain);
 
     const transfers = await getTransfers(address, prices);
     transfers.forEach((transfer) => {
