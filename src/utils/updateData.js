@@ -1,5 +1,6 @@
 import getStark from '.';
 import { clearTable, setTable } from '../redux/tableSlice';
+import getTableObject from './getTableObject';
 
 const formatInputData = (input) => {
   return input.split(/\r?\n/).flatMap((itm) => {
@@ -15,25 +16,25 @@ export default async function updateData(dispatch, input) {
   const formatedInput = formatInputData(input);
   for (let i = 0; i < formatedInput.length; i++) {
     const resp = await getStark(formatedInput[i].address);
-    dispatch(
-      setTable({
-        number: i + 1,
-        label: formatedInput[i].label,
-        balance: resp.balance.total,
-        offbridge: resp.bridge.DepositTx ? 'yes' : 'no',
-        volume: resp.volume,
-        txs: resp.tx,
-        fee: resp.fee,
-        contract: resp.activity.contractActivity,
-        mwd: `${resp.activity.monthActivity}/${resp.activity.weekActivity}/${resp.activity.dayActivity}`,
-        witm: resp.witm,
-        collapse: {
-          address: formatedInput[i].address,
-          balance: resp.balance.tokens,
-          transactions: resp.transactions,
-        },
-        result: resp.result,
-      }),
+    console.log('resp = ', resp);
+    console.log(resp.domain);
+    const data = getTableObject(
+      i + 1,
+      formatedInput[i].label,
+      resp.balance,
+      resp.bridge.DepositTx,
+      resp.volume,
+      resp.tx,
+      resp.fee,
+      resp.activity,
+      resp.witm,
+      resp.domain,
+      formatedInput[i].address,
+      resp.transactions,
+      resp.contracts,
+      resp.result,
     );
+    console.log('data = ', data);
+    dispatch(setTable(data));
   }
 }

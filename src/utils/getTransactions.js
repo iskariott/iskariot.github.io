@@ -1,8 +1,11 @@
 import axios from 'axios';
+import { getContracts } from './constants.js';
 import formateDate from './formateDate.js';
 import { getTransfers } from './getTransfers.js';
 
 const getContractNames = (transactions, ethPrice) => {
+  const contracts = getContracts();
+  let domain = false;
   transactions.forEach((t) => {
     t.date = formateDate(t.timestamp);
     t.fee = (Number(t.actual_fee_display) * ethPrice).toFixed(2);
@@ -11,7 +14,8 @@ const getContractNames = (transactions, ethPrice) => {
       const calls = t.main_calls[i];
       if (calls.selector_identifier === 'approve') continue;
       if (calls.selector_name === 'claim_name') {
-        t.contract_name = 'Domain name';
+        t.contract_name = 'Domain';
+        domain = true;
         break;
       }
       if (calls.selector_name === 'constructor') {
@@ -19,18 +23,23 @@ const getContractNames = (transactions, ethPrice) => {
         break;
       }
       if (calls.selector_name === 'upgrade') {
-        t.contract_name = 'upgrade';
+        t.contract_name = 'Upgrade';
         break;
       }
       if (calls.selector_identifier === 'transfer') {
-        t.contract_name = 'transfer';
+        t.contract_name = 'Transfer';
         break;
       }
       t.contract_name = calls.contract_identifier;
       break;
     }
+    const idx = contracts.findIndex((c) => c.name === t.contract_name);
+    if (idx !== -1) {
+      contracts[idx].count += 1;
+    }
   });
-  return transactions;
+  console.log('domain = ', domain);
+  return { contracts, domain };
 };
 
 async function fetchTransactions(url, Json_data, headers) {
@@ -95,7 +104,8 @@ export default async function getTransactions(address, prices) {
       allTransactions.push(...results.transactions);
     }
 
-    getContractNames(allTransactions, prices['StarkGate: ETH']);
+    const { contracts, domain } = getContractNames(allTransactions, prices['StarkGate: ETH']);
+    console.log('domain = ', domain);
 
     const transfers = await getTransfers(address, prices);
     transfers.forEach((transfer) => {
@@ -105,7 +115,7 @@ export default async function getTransactions(address, prices) {
         }
       });
     });
-    return { transfers, transactions: allTransactions };
+    return { transfers, transactions: allTransactions, contracts, domain };
   } catch (e) {
     console.log('getTransactions error: ', e);
     throw e;

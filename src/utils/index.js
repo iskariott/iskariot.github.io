@@ -37,7 +37,10 @@ export default async function getStark(address) {
   try {
     const tokensPrice = await getTokenPrice();
 
-    const { transactions, transfers } = await getTransactions(address, tokensPrice.starkgate);
+    const { transactions, transfers, contracts, domain } = await getTransactions(
+      address,
+      tokensPrice.starkgate,
+    );
     const witm = getWeeksInThisMonth(transactions);
     const activity = getActivity(address, transactions);
     const { tx, fee } = getTxAndFee(transactions, tokensPrice.eth);
@@ -53,8 +56,10 @@ export default async function getStark(address) {
       activity,
       bridge,
       volume,
-      witm: witm,
+      witm,
       transactions: gropuedTransasctions,
+      contracts,
+      domain,
     };
   } catch (e) {
     return {
@@ -66,6 +71,7 @@ export default async function getStark(address) {
       volume: '-',
       transactions: [],
       witm: '-',
+      domain: '-',
       result: 'error',
     };
   }
