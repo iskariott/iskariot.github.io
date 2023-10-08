@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+  padding: 5px 5px 5px 20px;
+  height: 40px;
+  margin-bottom: 10px;
+}
+
+.link {
+  font-size: 20px;
+  color: #b4b2b2;
+  text-decoration: none;
+  transition: color 0.1s;
+  &.active {
+    color: white;
+  }
+  &:hover {
+    color: #d3cfcf;
+  }
+}
