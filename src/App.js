@@ -12,7 +12,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const currentVersion = '1.0';
+    const currentVersion = '1.1';
 
     const storedVersion = localStorage.getItem('ver');
     if (storedVersion !== currentVersion) {
