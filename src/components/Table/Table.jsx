@@ -5,14 +5,16 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import { Columns } from '../../utils/constants';
 import { Tooltip } from '@mui/material';
 import { v4 as uuidv4 } from 'uuid';
 import AdditInfo from './AdditInfo';
 import st from './Table.module.scss';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import updateOneAddr from '../../utils/updateOneAddr';
+import { Columns } from '../../utils/starknet/helpers/constants';
+import updateOneAddr from '../../utils/starknet/updateOneAddr';
+import RemoveIcon from '@mui/icons-material/Remove';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 function Row({ row }) {
   const [showRowData, setShowRowData] = useState(false);
@@ -24,12 +26,24 @@ function Row({ row }) {
       setUpdate(false);
     })();
   }
-
   return (
     <>
       <TableRow tabIndex={-1} className={st.row} onClick={() => setShowRowData(!showRowData)}>
         {Columns.map((column) => {
-          let value = row[column.id];
+          let value = '';
+          if (column.id === 'starkgate')
+            value = row[column.id] ? (
+              <KeyboardArrowDownIcon color="success" />
+            ) : (
+              <RemoveIcon color="error" />
+            );
+          else if (column.id === 'domain')
+            value = row[column.id] ? (
+              <KeyboardArrowDownIcon color="success" />
+            ) : (
+              <RemoveIcon color="error" />
+            );
+          else value = row[column.id];
           return (
             <TableCell
               key={uuidv4()}

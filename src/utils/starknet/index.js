@@ -1,12 +1,12 @@
-import getTransactions from './getTransactions.js';
-import getTxAndFee from './getTxAndFee.js';
-import getBalance from './getBalance.js';
-import getActivity from './getActivity.js';
-import getBridge from './getBridge.js';
-import getVolume from './getVolume.js';
-import getTokenPrice from './getTokenPrice.js';
-import { Months } from './constants.js';
-import getWeeksInThisMonth from './getWeeksInThisMonth.js';
+import getTransactions from './walletData/getTransactions.js';
+import getTxAndFee from './walletData/getTxAndFee.js';
+import getBalance from './walletData/getBalance.js';
+import getActivity from './walletData/getActivity.js';
+import getBridge from './walletData/getBridge.js';
+import getVolume from './walletData/getVolume.js';
+import getTokenPrice from './helpers/getTokenPrice.js';
+import { Months } from './helpers/constants.js';
+import getWeeksInThisMonth from './walletData/getWeeksInThisMonth.js';
 
 function groupByDate(transactions) {
   const grouped = transactions.reduce((result, obj) => {

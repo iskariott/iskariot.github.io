@@ -1,6 +1,3 @@
-import RemoveIcon from '@mui/icons-material/Remove';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-
 export default function getTableObject(
   number,
   label,
@@ -21,14 +18,14 @@ export default function getTableObject(
     number,
     label,
     balance: balance.total,
-    starkgate: starkgate ? <KeyboardArrowDownIcon color="success" /> : <RemoveIcon color="error" />,
+    starkgate,
     volume,
     txs,
     fee,
     contractsCount: activity.contractActivity,
     mwd: `${activity.monthActivity}/${activity.weekActivity}/${activity.dayActivity}`,
     witm,
-    domain: domain ? <KeyboardArrowDownIcon color="success" /> : <RemoveIcon color="error" />,
+    domain,
     collapse: {
       address,
       balance: balance.tokens,

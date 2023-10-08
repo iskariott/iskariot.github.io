@@ -1,6 +1,6 @@
 import getStark from '.';
-import { clearTable, setTable } from '../redux/tableSlice';
-import getTableObject from './getTableObject';
+import { clearTable, setTable } from '../../redux/tableSlice';
+import getTableObject from './helpers/getTableObject';
 
 const formatInputData = (input) => {
   return input.split(/\r?\n/).flatMap((itm) => {

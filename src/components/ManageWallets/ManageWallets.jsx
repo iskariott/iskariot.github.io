@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { set } from '../../redux/inputSlice';
 import { useEffect, useState } from 'react';
 import StButton from '../StButton/StButton';
-import updateData from '../../utils/updateData';
+import updateData from '../../utils/starknet/update';
 
 export default function ManageWallets(props) {
   const { isModalOpen, setModal } = props;

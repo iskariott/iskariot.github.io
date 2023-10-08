@@ -34,7 +34,7 @@ export default function AdditInfo({ show, collapseData, setUpdate }) {
                     component="div"
                     sx={{ display: 'flex', columnGap: '20px', m: '15px 0 5px 0' }}>
                     {collapseData.contracts.map((c) => (
-                      <ContractAvatar contract={c} />
+                      <ContractAvatar key={uuidv4()} contract={c} />
                     ))}
                   </Box>
                   <div>Address: {collapseData.address}</div>

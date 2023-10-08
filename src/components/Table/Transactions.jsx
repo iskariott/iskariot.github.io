@@ -1,5 +1,6 @@
 import { Box, Collapse } from '@mui/material';
 import { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import st from './Transactions.module.scss';
 
 export default function Transactions({ transaction }) {
@@ -14,6 +15,7 @@ export default function Transactions({ transaction }) {
       <Collapse in={showTransactions} timeout="auto" unmountOnExit>
         {transaction[Object.keys(transaction)[0]].map((data) => (
           <Box
+            key={uuidv4()}
             sx={{
               display: 'flex',
               columnGap: '10px',

@@ -4,9 +4,7 @@ import ManageWallets from './components/ManageWallets/ManageWallets';
 import WalletsTable from './components/Table/Table';
 import StButton from './components/StButton/StButton';
 import './App.scss';
-import updateData from './utils/updateData';
-import { Avatar, Badge, Box } from '@mui/material';
-import ContractAvatar from './components/ContractAvatar/ContractAvatar';
+import updateData from './utils/starknet/update';
 
 function App() {
   const [isModalOpen, setModal] = useState(false);

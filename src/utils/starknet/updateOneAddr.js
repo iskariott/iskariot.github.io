@@ -1,6 +1,6 @@
 import getStark from '.';
-import { updateTable } from '../redux/tableSlice';
-import getTableObject from './getTableObject';
+import { updateTable } from '../../redux/tableSlice';
+import getTableObject from './helpers/getTableObject';
 
 export default async function updateOneAddr(dispatch, address, label, id) {
   const resp = await getStark(address);

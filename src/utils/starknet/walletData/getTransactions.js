@@ -1,10 +1,10 @@
 import axios from 'axios';
-import { getContracts } from './constants.js';
-import formateDate from './formateDate.js';
+import getContractsObj from '../helpers/getContractsObj.js';
+import formateDate from '../helpers/formateDate.js';
 import { getTransfers } from './getTransfers.js';
 
 const getContractNames = (transactions, ethPrice) => {
-  const contracts = getContracts();
+  const contracts = getContractsObj();
   let domain = false;
   transactions.forEach((t) => {
     t.date = formateDate(t.timestamp);
