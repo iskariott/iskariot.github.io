@@ -1,5 +1,5 @@
 import getStark from '.';
-import { updateTable } from '../../redux/tableSlice';
+import { updateStarkTable } from '@redux/tableSlice';
 import getTableObject from './helpers/getTableObject';
 
 export default async function updateOneAddr(dispatch, address, label, id) {
@@ -20,5 +20,5 @@ export default async function updateOneAddr(dispatch, address, label, id) {
     resp.contracts,
     resp.result,
   );
-  dispatch(updateTable(data));
+  dispatch(updateStarkTable(data));
 }

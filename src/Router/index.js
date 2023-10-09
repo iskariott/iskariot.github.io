@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { createBrowserRouter, Outlet } from 'react-router-dom';
-import Header from '../components/Header/Header';
-import Starknet from '../Pages/Starknet';
-import Zksync from '../Pages/Zksync';
+import Header from '@components/Header/Header';
+import Starknet from '@pages/Starknet';
+import Zksync from '@pages/Zksync';
 
 const Root = () => {
   useEffect(() => {

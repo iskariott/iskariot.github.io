@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import ManageWallets from '../components/ManageWallets/ManageWallets';
-import StButton from '../components/StButton/StButton';
-import WalletsTable from '../components/Table/Table';
-import updateData from '../utils/starknet/update';
+import StButton from '@components/StButton/StButton';
+import updateData from '@starkUtils/update';
+import StarkManageWallets from '@components/Starknet/StarkManageWallets';
+import StarkTable from '../components/Starknet/StarkTable';
 
 export default function Starknet() {
   const [isModalOpen, setModal] = useState(false);
-  const input = useSelector((state) => state.red.input.data);
+  const input = useSelector((state) => state.red.input.data.stark);
   const dispatch = useDispatch();
   return (
     <>
@@ -17,8 +17,8 @@ export default function Starknet() {
       <StButton sx={{ mb: 1 }} onClick={() => updateData(dispatch, input)}>
         update
       </StButton>
-      <ManageWallets isModalOpen={isModalOpen} setModal={setModal} />
-      <WalletsTable />
+      <StarkManageWallets isModalOpen={isModalOpen} setModal={setModal} />
+      <StarkTable />
     </>
   );
 }

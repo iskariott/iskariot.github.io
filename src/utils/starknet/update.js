@@ -1,5 +1,5 @@
 import getStark from '.';
-import { clearTable, setTable } from '../../redux/tableSlice';
+import { clearStarkTable, setStarkTable } from '@redux/tableSlice';
 import getTableObject from './helpers/getTableObject';
 
 const formatInputData = (input) => {
@@ -12,7 +12,7 @@ const formatInputData = (input) => {
 
 export default async function updateData(dispatch, input) {
   if (!input) return;
-  dispatch(clearTable());
+  dispatch(clearStarkTable());
   const formatedInput = formatInputData(input);
   for (let i = 0; i < formatedInput.length; i++) {
     const resp = await getStark(formatedInput[i].address);
@@ -32,6 +32,6 @@ export default async function updateData(dispatch, input) {
       resp.contracts,
       resp.result,
     );
-    dispatch(setTable(data));
+    dispatch(setStarkTable(data));
   }
 }

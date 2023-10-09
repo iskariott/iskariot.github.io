@@ -3,18 +3,15 @@ import { createSlice } from '@reduxjs/toolkit';
 export const inputSlice = createSlice({
   name: 'inputSlice',
   initialState: {
-    data: '',
+    data: { stark: '', zk: '' },
   },
   reducers: {
-    set: (state, actions) => {
-      state.data = actions.payload;
-    },
-    clear: (state) => {
-      state.data = '';
+    setStarkInput: (state, actions) => {
+      state.data.stark = actions.payload;
     },
   },
 });
 
-export const { set, clear } = inputSlice.actions;
+export const { setStarkInput } = inputSlice.actions;
 
 export default inputSlice.reducer;

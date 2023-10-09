@@ -3,22 +3,22 @@ import { createSlice } from '@reduxjs/toolkit';
 export const tableSlice = createSlice({
   name: 'tableSlice',
   initialState: {
-    data: [],
+    data: { stark: [], zk: [] },
   },
   reducers: {
-    setTable: (state, actions) => {
-      state.data = [...state.data, actions.payload];
+    setStarkTable: (state, actions) => {
+      state.data.stark = [...state.data.stark, actions.payload];
     },
-    updateTable: (state, action) => {
-      const idx = state.data.findIndex((x) => x.number === action.payload.number);
-      state.data[idx] = action.payload;
+    updateStarkTable: (state, action) => {
+      const idx = state.data.stark.findIndex((x) => x.number === action.payload.number);
+      state.data.stark[idx] = action.payload;
     },
-    clearTable: (state) => {
-      state.data = [];
+    clearStarkTable: (state) => {
+      state.data.stark = [];
     },
   },
 });
 
-export const { setTable, updateTable, clearTable } = tableSlice.actions;
+export const { setStarkTable, updateStarkTable, clearStarkTable } = tableSlice.actions;
 
 export default tableSlice.reducer;

@@ -7,69 +7,10 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { Tooltip } from '@mui/material';
 import { v4 as uuidv4 } from 'uuid';
-import AdditInfo from './AdditInfo';
-import st from './Table.module.scss';
-import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Columns } from '../../utils/starknet/helpers/constants';
-import updateOneAddr from '../../utils/starknet/updateOneAddr';
-import RemoveIcon from '@mui/icons-material/Remove';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import { Columns } from '@starkUtils/helpers/constants';
+import RowList from './RowList';
 
-function Row({ row }) {
-  const [showRowData, setShowRowData] = useState(false);
-  const [update, setUpdate] = useState(false);
-  const dispatch = useDispatch();
-  if (update) {
-    (async () => {
-      await updateOneAddr(dispatch, row.collapse.address, row.label, row.number);
-      setUpdate(false);
-    })();
-  }
-  return (
-    <>
-      <TableRow tabIndex={-1} className={st.row} onClick={() => setShowRowData(!showRowData)}>
-        {Columns.map((column) => {
-          let value = '';
-          if (column.id === 'starkgate')
-            value = row[column.id] ? (
-              <KeyboardArrowDownIcon color="success" />
-            ) : (
-              <RemoveIcon color="error" />
-            );
-          else if (column.id === 'domain')
-            value = row[column.id] ? (
-              <KeyboardArrowDownIcon color="success" />
-            ) : (
-              <RemoveIcon color="error" />
-            );
-          else value = row[column.id];
-          return (
-            <TableCell
-              key={uuidv4()}
-              align={column.align}
-              sx={{ color: '#c4c0c0', border: '1px solid #272626' }}>
-              {value}
-            </TableCell>
-          );
-        })}
-      </TableRow>
-      {row.result === 'error' ? (
-        <></>
-      ) : (
-        <AdditInfo
-          collapseData={row.collapse}
-          show={showRowData}
-          update={update}
-          setUpdate={setUpdate}
-        />
-      )}
-    </>
-  );
-}
-
-export default function WalletsTable() {
-  const rows = useSelector((state) => state.red.table.data);
+export default function WalletsTable({ rows, updateAddr }) {
   return (
     <div>
       <TableContainer sx={{ maxHeight: '90vh' }}>
@@ -81,7 +22,6 @@ export default function WalletsTable() {
                   <Tooltip title={column.hint ? column.hint : ''} key={uuidv4()}>
                     <TableCell
                       sx={{ background: '#2c2c2c', color: 'grey', border: '1px solid #1e1e1e' }}
-                      className={st.tableHead}
                       align={column.align}
                       style={{ minWidth: column.minWidth, width: column.width }}>
                       {column.label}
@@ -93,7 +33,7 @@ export default function WalletsTable() {
           </TableHead>
           <TableBody>
             {rows.map((row) => {
-              return <Row row={row} key={uuidv4()} />;
+              return <RowList row={row} key={uuidv4()} updateAddr={updateAddr} />;
             })}
           </TableBody>
         </Table>

@@ -1,6 +1,6 @@
 import axios from 'axios';
-import getContractsObj from '../helpers/getContractsObj.js';
-import formateDate from '../helpers/formateDate.js';
+import getContractsObj from '@starkUtils/helpers/getContractsObj.js';
+import formateDate from '@starkUtils/helpers/formateDate.js';
 import { getTransfers } from './getTransfers.js';
 
 const getContractNames = (transactions, ethPrice) => {
