@@ -5,3 +5,30 @@
     background-color: #181717;
   }
 }
+
+.addr {
+  cursor: pointer;
+  align-self: center;
+  transition: color linear 0.1s;
+  font-size: 15px;
+  font-family: monospace;
+  &:hover {
+    color: white;
+  }
+  &:active {
+    color: grey;
+  }
+}
+
+.rowBtn {
+  cursor: pointer;
+  align-self: center;
+  transition: color linear 0.1s;
+  width: 30px;
+  &:hover {
+    color: white;
+  }
+  &:active {
+    color: grey;
+  }
+}

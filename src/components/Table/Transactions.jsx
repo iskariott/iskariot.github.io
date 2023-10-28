@@ -26,10 +26,10 @@ export default function Transactions({ transaction }) {
               sx={{
                 display: 'grid',
               }}>
-              <span>{'contract: ' + data.contract_name}</span>
+              <span>{'protocol: ' + data.contract_name}</span>
               <span>{'fee: ' + data.fee}</span>
               <span>{'time: ' + data.time}</span>
-              <span>{'txh: ' + data.hash}</span>
+              <span>{'hash: ' + data.hash}</span>
             </Box>
           </Box>
         ))}

@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
 import { createBrowserRouter, Outlet } from 'react-router-dom';
 import Header from '@components/Header/Header';
-import Starknet from '@pages/Starknet';
-import Zksync from '@pages/Zksync';
+import Zksync from '@pages/Zksync/Zksync';
+import Aptos from '@pages/Aptos/Aptos';
+import Starknet from '@pages/Starknet/Starknet';
 
 const Root = () => {
   useEffect(() => {
-    const currentVersion = '1.1';
-
+    const currentVersion = '1.2';
     const storedVersion = localStorage.getItem('ver');
     if (storedVersion !== currentVersion) {
       localStorage.clear();
@@ -28,12 +28,16 @@ export const router = createBrowserRouter([
     element: <Root />,
     children: [
       {
-        path: 'starknet',
-        element: <Starknet />,
+        path: 'aptos',
+        element: <Aptos />,
       },
       {
         path: 'zksync',
         element: <Zksync />,
+      },
+      {
+        path: 'starknet',
+        element: <Starknet />,
       },
     ],
   },

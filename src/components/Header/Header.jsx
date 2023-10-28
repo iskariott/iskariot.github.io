@@ -7,13 +7,18 @@ export default function Header() {
       <nav className={st.container}>
         <NavLink
           className={({ isActive }) => (isActive ? [st.link, st.active].join(' ') : st.link)}
+          to={'zksync'}>
+          Zksync
+        </NavLink>
+        <NavLink
+          className={({ isActive }) => (isActive ? [st.link, st.active].join(' ') : st.link)}
           to={'starknet'}>
           Starknet
         </NavLink>
         <NavLink
           className={({ isActive }) => (isActive ? [st.link, st.active].join(' ') : st.link)}
-          to={'zksync'}>
-          Zksync
+          to={'aptos'}>
+          Aptos
         </NavLink>
       </nav>
     </header>
