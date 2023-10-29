@@ -3,14 +3,14 @@ import { createSlice } from '@reduxjs/toolkit';
 export const tableSlice = createSlice({
   name: 'tableSlice',
   initialState: {
-    data: { apt: [], zk: [] },
+    data: { apt: [], zk: [], stark: [] },
   },
   reducers: {
     setAptTable: (state, actions) => {
       state.data.apt = [...state.data.apt, actions.payload];
     },
     updateAptTable: (state, action) => {
-      const idx = state.data.apt.findIndex((x) => x.number === action.payload.number);
+      const idx = state.data.apt.findIndex((x) => x.id === action.payload.id);
       state.data.apt[idx] = action.payload;
     },
     clearAptTable: (state) => {
@@ -20,11 +20,22 @@ export const tableSlice = createSlice({
       state.data.zk = [...state.data.zk, actions.payload];
     },
     updateZkTable: (state, action) => {
-      const idx = state.data.zk.findIndex((x) => x.number === action.payload.number);
+      const idx = state.data.zk.findIndex((x) => x.id === action.payload.id);
+      console.log('idx = ', idx);
       state.data.zk[idx] = action.payload;
     },
     clearZkTable: (state) => {
       state.data.zk = [];
+    },
+    setStarkTable: (state, actions) => {
+      state.data.stark = [...state.data.stark, actions.payload];
+    },
+    updateStarkTable: (state, action) => {
+      const idx = state.data.stark.findIndex((x) => x.id === action.payload.id);
+      state.data.stark[idx] = action.payload;
+    },
+    clearStarkTable: (state) => {
+      state.data.stark = [];
     },
   },
 });
@@ -36,6 +47,9 @@ export const {
   setZkTable,
   updateZkTable,
   clearZkTable,
+  setStarkTable,
+  updateStarkTable,
+  clearStarkTable,
 } = tableSlice.actions;
 
 export default tableSlice.reducer;

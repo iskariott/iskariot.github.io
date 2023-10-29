@@ -5,14 +5,14 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import { Box, Tooltip } from '@mui/material';
+import { Tooltip } from '@mui/material';
 import { v4 as uuidv4 } from 'uuid';
 import RowList from './RowList';
 
 export default function WalletsTable({ rows, updateAddr, columns, AdditInfo }) {
   return (
     <div>
-      <TableContainer sx={{ maxHeight: '90vh' }}>
+      <TableContainer style={{ maxHeight: 'calc(100vh - 105px)' }}>
         <Table stickyHeader sx={{ background: '#1e1e1e' }}>
           <TableHead>
             <TableRow>

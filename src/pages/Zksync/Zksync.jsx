@@ -14,7 +14,6 @@ function ZkManageWallets({ isModalOpen, setModal }) {
   const [inputData, setInputData] = useState('');
   const dispatch = useDispatch();
   const storedInputData = useSelector((state) => state.red.input.data.zk);
-  console.log('Columns = ', Columns);
 
   useEffect(() => {
     setInputData(storedInputData);
