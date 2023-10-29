@@ -21,7 +21,6 @@ export const tableSlice = createSlice({
     },
     updateZkTable: (state, action) => {
       const idx = state.data.zk.findIndex((x) => x.id === action.payload.id);
-      console.log('idx = ', idx);
       state.data.zk[idx] = action.payload;
     },
     clearZkTable: (state) => {

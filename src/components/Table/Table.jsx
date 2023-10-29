@@ -12,8 +12,8 @@ import RowList from './RowList';
 export default function WalletsTable({ rows, updateAddr, columns, AdditInfo }) {
   return (
     <div>
-      <TableContainer style={{ maxHeight: 'calc(100vh - 105px)' }}>
-        <Table stickyHeader sx={{ background: '#1e1e1e' }}>
+      <TableContainer>
+        <Table sx={{ background: '#1e1e1e' }}>
           <TableHead>
             <TableRow>
               {columns.map((column) => {

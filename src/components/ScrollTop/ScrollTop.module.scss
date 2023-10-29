@@ -1,0 +1,13 @@
+.box {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  z-index: 1;
+}
+
+.fab {
+  background-color: #1a2229;
+  &:hover {
+    background-color: #25313b;
+  }
+}
