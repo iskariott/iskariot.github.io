@@ -24,7 +24,7 @@ export default async function updateAll(dispatch, input) {
     allWalletsBalance += resp.totalBalance;
     allWalletsFee += resp.totalFee;
     const data = {
-      id: i + 1,
+      id: i,
       label: formatedInput[i].label,
       totalBalance: resp.totalBalance,
       balances: resp.balances,

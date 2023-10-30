@@ -20,7 +20,7 @@ export default function ManageWallets({
       <Box className={st.container}>
         <TextField
           id="outlined-basic"
-          placeholder={`label1 0x0001...\nlabel2 0x0002...\n`}
+          placeholder={`1 0x0001...\n2 0x0002...\n10 0x00010...\n13 0x00013...\n`}
           variant="outlined"
           multiline
           maxRows={15}

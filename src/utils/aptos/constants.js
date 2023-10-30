@@ -1,6 +1,6 @@
 export const Columns = [
   { id: 'id', label: '№', align: 'center', padding: '16px 5px' },
-  { id: 'label', label: 'Label', align: 'center' },
+  { id: 'label', label: '#', align: 'center' },
   { id: 'address', label: 'address', align: 'center' },
   {
     id: 'totalBalance',

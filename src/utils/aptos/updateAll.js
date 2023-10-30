@@ -20,7 +20,7 @@ export default async function updateAll(dispatch, input) {
   for (let i = 0; i < formatedInput.length; i++) {
     const resp = await getAptos(formatedInput[i].address, aptPrice);
     const data = {
-      id: i + 1,
+      id: i,
       label: formatedInput[i].label,
       totalBalance: resp.totalBalance,
       APT: resp.balances.APT,

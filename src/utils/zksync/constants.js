@@ -59,8 +59,7 @@ export const BalanceSymbol = ['ETH', 'USDT', 'USDC', 'DAI', 'WETH'];
 
 export const Columns = [
   { id: 'more', label: '', align: 'center', padding: '16px 5px' },
-  { id: 'id', label: '№', align: 'center', padding: '16px 7px' },
-  { id: 'label', label: 'Label', align: 'center' },
+  { id: 'label', label: '#', align: 'center', padding: '16px 7px' },
   { id: 'address', label: 'Address', align: 'center' },
   {
     id: 'totalBalance',
