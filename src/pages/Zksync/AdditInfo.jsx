@@ -18,7 +18,7 @@ export default function AdditInfo({ show, row }) {
           color: '#c4c0c0',
           background: '#2c2c2c',
         }}
-        colSpan={13}>
+        colSpan={15}>
         <Collapse in={show} timeout="auto" unmountOnExit>
           <div>
             <Table size="small" aria-label="purchases">
@@ -27,19 +27,19 @@ export default function AdditInfo({ show, row }) {
                   <Box
                     component="div"
                     sx={{ display: 'flex', columnGap: '25px', m: '15px 0 5px 0' }}>
-                    {Object.keys(row.protocols).map((key) => (
+                    {row.protocols.map((p) => (
                       <ContractAvatar
                         key={uuidv4()}
                         contract={{
-                          name: key,
-                          url: row.protocols[key].url,
-                          count: row.protocols[key].count,
+                          name: p.name,
+                          url: p.url,
+                          count: p.count,
                         }}
                       />
                     ))}
                   </Box>
                   {row.lite.isActive ? (
-                    <Box sx={{ display: 'flex', columnGap: '10px' }}>
+                    <Box sx={{ display: 'flex', columnGap: '10px', fontSize: '17px' }}>
                       eraLite:
                       <div>txs: {row.lite.txCount}</div>
                       <div>balance: {'$' + row.lite.balance.toFixed(2)}</div>

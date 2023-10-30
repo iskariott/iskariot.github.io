@@ -1,4 +1,8 @@
-import formateDateToDDMMYY, { formateTokenValue, getWeekOfMonth } from '../common';
+import formateDateToDDMMYY, {
+  formateContracts,
+  formateTokenValue,
+  getWeekOfMonth,
+} from '../common';
 import { BalanceSymbol, ContractsStr, Months, StableSymbol } from './constants';
 import { fetchBalances, fetchLite, fetchTransfers, fetchTxs } from './fetchData';
 
@@ -80,7 +84,7 @@ export const getTxs = async (address, ethPrice) => {
     const currMonth = new Date().getMonth();
     let txCount = 0;
     let totalFee = 0;
-    const protocols = {};
+    // const protocols = {};
     const objGroupedTrans = {};
 
     txsData.forEach((tx) => {
@@ -94,37 +98,32 @@ export const getTxs = async (address, ethPrice) => {
       const fee = (parseInt(tx.fee) / Math.pow(10, 18)) * ethPrice;
       totalFee += fee;
 
-      let contract = contracts.find(
+      let idx = contracts.findIndex(
         (contract) => contract.address.toLowerCase() === tx.to.toLowerCase(),
       );
-      if (contract) {
-        if (!protocols[contract.name]) {
-          protocols[contract.name] = {};
-          protocols[contract.name].count = 0;
-        }
-        protocols[contract.name].count++;
-        protocols[contract.name].url = contract.url;
+      if (idx !== -1) {
+        contracts[idx].count++;
       }
-
       const dateKey = Months[date.getMonth() + 1] + ' ' + date.getUTCFullYear();
       if (!objGroupedTrans[dateKey]) {
         objGroupedTrans[dateKey] = [];
       }
       objGroupedTrans[dateKey].push({
-        contract_name: contract?.name || '-',
+        contract_name: contracts[idx]?.name || '-',
         fee: '$' + fee.toFixed(2),
         date: formateDateToDDMMYY(date),
         hash: tx.hash,
         time: date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds(),
       });
     });
+
     return {
       totalFee: '$' + totalFee.toFixed(2),
       txCount,
       uniqueContracts: uniqueContracts.size,
       mwd: uniqueMonths.size + '/' + uniqueWeeks.size + '/' + uniqueDays.size,
       witm: uniqueWeeksInCurMonth.size,
-      protocols,
+      protocols: formateContracts(contracts),
       transactions: Object.keys(objGroupedTrans).map((itm) => ({ [itm]: objGroupedTrans[itm] })),
     };
   } catch (e) {

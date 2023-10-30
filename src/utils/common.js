@@ -15,6 +15,20 @@ export function formateTokenValue(value, decimal) {
   return parseFloat((parseInt(value) / 10 ** decimal).toFixed(4));
 }
 
+export function formateContracts(contracts) {
+  return contracts
+    .reduce((acc, item) => {
+      const existingItem = acc.find((el) => el.name === item.name);
+      if (existingItem) {
+        existingItem.count += item.count;
+      } else {
+        acc.push({ name: item.name, count: item.count, url: item.url });
+      }
+      return acc;
+    }, [])
+    .sort((a, b) => b.count - a.count);
+}
+
 export function getWeekOfMonth(t) {
   const date = new Date(t);
   // let adjustedDate = date.getDate() + date.getDay();
