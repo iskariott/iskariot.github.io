@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { createBrowserRouter, Outlet } from 'react-router-dom';
+import { createHashRouter, Outlet } from 'react-router-dom';
 import Header from '@components/Header/Header';
 import Zksync from '@pages/Zksync/Zksync';
 import Aptos from '@pages/Aptos/Aptos';
@@ -25,7 +25,7 @@ const Root = () => {
   );
 };
 
-export const router = createBrowserRouter([
+export const router = createHashRouter([
   {
     path: '/',
     element: <Root />,
