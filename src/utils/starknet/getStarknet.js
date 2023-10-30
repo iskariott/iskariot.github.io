@@ -9,9 +9,10 @@ export default async function getStarknet(address, ethPrice) {
     );
     const { balances, total } = await getBalances(address);
     return {
-      ETH: balances['ETH'],
-      USDC: balances['USDC'],
-      USDT: balances['USDT'],
+      ETH: balances['ETH'] || 0,
+      WETH: balances['WETH'] || 0,
+      USDC: balances['USDC'] || 0,
+      USDT: balances['USDT'] || 0,
       totalBalance: total,
       txCount,
       totalFee,

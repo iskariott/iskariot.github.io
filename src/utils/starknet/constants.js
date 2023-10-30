@@ -35,17 +35,16 @@ export const Months = {
 };
 
 export const Columns = [
-  { id: 'id', label: '№', align: 'center', padding: '16px 5px' },
   { id: 'label', label: '#', align: 'center' },
   { id: 'address', label: 'address', align: 'center' },
   {
-    id: 'totalBalance',
-    label: 'Balance',
+    id: 'ETH',
+    label: 'ETH',
     align: 'center',
   },
   {
-    id: 'ETH',
-    label: 'USDC',
+    id: 'WETH',
+    label: 'WETH',
     align: 'center',
   },
   {

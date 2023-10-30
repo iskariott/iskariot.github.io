@@ -13,7 +13,7 @@ export const getBalances = async (address, aptPrice) => {
           let tmp = formateTokenValue(balance.balance, balance.coin_info.decimals);
           if (balance.coin_info.symbol === 'APT') tmp *= aptPrice;
           total += tmp;
-          balances[balance.coin_info.symbol] = tmp;
+          balances[balance.coin_info.symbol] = '$' + tmp.toFixed(2);
         }
       }
     });

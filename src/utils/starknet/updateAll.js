@@ -27,8 +27,9 @@ export default async function updateAll(dispatch, input) {
     const data = {
       id: i,
       label: formatedInput[i].label,
-      totalBalance: resp.totalBalance,
+      // totalBalance: resp.totalBalance,
       ETH: resp.ETH,
+      WETH: resp.WETH,
       USDC: resp.USDC,
       USDT: resp.USDT,
       'bridge to/from': resp.bridgeTo + '/' + resp.bridgeFrom,

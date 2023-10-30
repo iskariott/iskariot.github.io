@@ -38,12 +38,6 @@ export default function AdditInfo({ show, row }) {
                       />
                     ))}
                   </Box>
-                  <Box sx={{ display: 'flex', columnGap: '10px' }}>
-                    Balances:
-                    {Object.keys(row.balances).map((b) => (
-                      <div key={uuidv4()}> {`${b} ${row.balances[b]}`}</div>
-                    ))}
-                  </Box>
                   {row.lite.isActive ? (
                     <Box sx={{ display: 'flex', columnGap: '10px' }}>
                       eraLite:

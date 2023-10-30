@@ -6,9 +6,13 @@ export default async function getZksync(address, ethPrice) {
     const { bridgeTo, bridgeFrom, volume } = await getTransfers(address, ethPrice);
     const { balances, total } = await getBalances(address, ethPrice);
     const lite = await getLite(address, ethPrice);
+    console.log('balances = ', balances);
     return {
-      balances,
-      totalBalance: total,
+      ETH: balances.ETH || 0,
+      WETH: balances.WETH || 0,
+      USDC: balances.USDC || 0,
+      USDT: balances.USDT || 0,
+      // totalBalance: total,
       txCount: txs.txCount,
       totalFee: txs.totalFee,
       mwd: txs.mwd,

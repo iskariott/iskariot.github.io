@@ -55,15 +55,30 @@ export const Months = {
   12: 'December',
 };
 
-export const BalanceSymbol = ['ETH', 'USDT', 'USDC', 'DAI', 'WETH'];
+export const BalanceSymbol = ['ETH', 'USDT', 'USDC', 'WETH'];
 
 export const Columns = [
   { id: 'more', label: '', align: 'center', padding: '16px 5px' },
   { id: 'label', label: '#', align: 'center', padding: '16px 7px' },
   { id: 'address', label: 'Address', align: 'center' },
   {
-    id: 'totalBalance',
-    label: 'Balance',
+    id: 'ETH',
+    label: 'ETH',
+    align: 'center',
+  },
+  {
+    id: 'WETH',
+    label: 'WETH',
+    align: 'center',
+  },
+  {
+    id: 'USDC',
+    label: 'USDC',
+    align: 'center',
+  },
+  {
+    id: 'USDT',
+    label: 'USDT',
     align: 'center',
   },
   {

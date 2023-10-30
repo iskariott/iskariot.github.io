@@ -6,7 +6,10 @@ export default async function getAptos(address, aptPrice) {
     const { balances, total } = await getBalances(address, aptPrice);
     return {
       totalBalance: total,
-      balances: balances,
+      // balances: balances,
+      APT: balances.APT || 0,
+      USDT: balances.USDT || 0,
+      USDC: balances.USDC || 0,
       txCount: txs.txsCount,
       totalFee: txs.totalFee,
       mwd: txs.mwd,

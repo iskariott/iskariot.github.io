@@ -9,8 +9,9 @@ export default async function updateCurrent(dispatch, address, label, id) {
   const data = {
     id,
     label,
-    totalBalance: resp.totalBalance,
+    // totalBalance: resp.totalBalance,
     ETH: resp.ETH,
+    WETH: resp.WETH,
     USDC: resp.USDC,
     USDT: resp.USDT,
     'bridge to/from': resp.bridgeTo + '/' + resp.bridgeFrom,

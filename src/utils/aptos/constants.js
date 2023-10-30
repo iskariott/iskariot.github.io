@@ -1,10 +1,14 @@
 export const Columns = [
-  { id: 'id', label: '№', align: 'center', padding: '16px 5px' },
   { id: 'label', label: '#', align: 'center' },
   { id: 'address', label: 'address', align: 'center' },
+  // {
+  //   id: 'totalBalance',
+  //   label: 'Balance',
+  //   align: 'center',
+  // },
   {
-    id: 'totalBalance',
-    label: 'Balance',
+    id: 'APT',
+    label: 'APT',
     align: 'center',
   },
   {
@@ -15,11 +19,6 @@ export const Columns = [
   {
     id: 'USDT',
     label: 'USDT',
-    align: 'center',
-  },
-  {
-    id: 'DAI',
-    label: 'DAI',
     align: 'center',
   },
   {
