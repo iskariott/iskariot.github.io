@@ -8,8 +8,7 @@ import ScrollToTop from '../components/ScrollTop/ScrollTop';
 
 const Root = () => {
   useEffect(() => {
-    console.log('here');
-    const currentVersion = '1.2';
+    const currentVersion = '1.3';
     const storedVersion = localStorage.getItem('ver');
     if (storedVersion !== currentVersion) {
       localStorage.clear();

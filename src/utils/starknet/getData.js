@@ -1,5 +1,5 @@
-import formateDateToDDMMYY, { formateTokenValue, getWeekOfMonth } from '../common';
-import { BalanceSymbol, CONTRACTS, ContractsStr, Months, STABLES, StableSymbol } from './constants';
+import { getWeekOfMonth } from '../common';
+import { CONTRACTS, STABLES } from './constants';
 import { fetchBalances, fetchLite, fetchTransfers, fetchTxs } from './fetchData';
 
 export const getBalances = async (address) => {
@@ -48,21 +48,17 @@ export const getTransfers = async (address, ethPrice) => {
             volume += parseFloat(transfer.transfer_value);
           }
         }
-
-        if (
-          transfer.transfer_from ===
-            '0x0000000000000000000000000000000000000000000000000000000000000000' &&
-          transfer.call_name === 'permissionedMint'
-        ) {
+      } else if (
+        transfer.transfer_from ===
+        '0x0000000000000000000000000000000000000000000000000000000000000000'
+      ) {
+        if (transfer.call_name === 'permissionedMint') {
           bridgeTo++;
-        }
-
-        if (
-          transfer.transfer_from ===
-            '0x0000000000000000000000000000000000000000000000000000000000000000' &&
-          transfer.call_name === 'permissionedBurn'
-        ) {
+          volume += parseFloat(transfer.transfer_value) * ethPrice;
+          uniqueContracts.add(transfer.transfer_to);
+        } else if (transfer.call_name === 'permissionedBurn') {
           bridgeFrom++;
+          volume += parseFloat(transfer.transfer_value) * ethPrice;
         }
       }
     });
