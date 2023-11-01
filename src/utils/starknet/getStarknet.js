@@ -1,7 +1,6 @@
 import { getBalances, getTransfers, getTxs } from './getData';
 
 export default async function getStarknet(address, ethPrice, proxy) {
-  console.log('address = ', address);
   try {
     const { totalFee, txCount, mwd, witm } = await getTxs(address, ethPrice, proxy);
     const { bridgeTo, bridgeFrom, volume, protocols, uniqueContracts } = await getTransfers(

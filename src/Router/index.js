@@ -9,7 +9,7 @@ import Home from '../pages/Home/Home';
 
 const Root = () => {
   useEffect(() => {
-    const currentVersion = '1.3';
+    const currentVersion = '1.4';
     const storedVersion = localStorage.getItem('ver');
     if (storedVersion !== currentVersion) {
       localStorage.clear();
