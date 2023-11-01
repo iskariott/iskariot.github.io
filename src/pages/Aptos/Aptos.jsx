@@ -7,6 +7,7 @@ import StButton from '@components/StButton/StButton';
 import updateAll from '@utils/aptos/updateAll';
 import updateCurrent from '@utils/aptos/updateCurrent';
 import { Columns } from '@utils/aptos/constants';
+import LoadProgress from '@components/Loader/Loader';
 
 function AptManageWallets({ isModalOpen, setModal }) {
   const [inputData, setInputData] = useState('');
@@ -37,7 +38,7 @@ function AptManageWallets({ isModalOpen, setModal }) {
 }
 
 function AptTable() {
-  const rows = useSelector((state) => state.red.table.data.apt);
+  const rows = useSelector((state) => state.red.table.data.apt.wal);
 
   const Comp = () =>
     rows.length ? <WalletsTable rows={rows} updateAddr={updateCurrent} columns={Columns} /> : <></>;
@@ -58,6 +59,7 @@ export default function Aptos() {
       </StButton>
       <AptManageWallets isModalOpen={isModalOpen} setModal={setModal} />
       <AptTable />
+      <LoadProgress />
     </>
   );
 }

@@ -26,6 +26,7 @@ export async function fetchTxs(address) {
       await axios.get(apiUrl + '/txns', config).then(async (response) => {
         let items = response.data.items;
         let lastPage = response.data.lastPage;
+        if (!items.length && !lastPage) throw new Error(`address ${address} not found.`);
         Object.values(items).forEach((tx) => {
           txs.push(tx);
         });

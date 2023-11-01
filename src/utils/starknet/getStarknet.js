@@ -1,11 +1,13 @@
 import { getBalances, getTransfers, getTxs } from './getData';
 
-export default async function getStarknet(address, ethPrice) {
+export default async function getStarknet(address, ethPrice, proxy) {
+  console.log('address = ', address);
   try {
-    const { totalFee, txCount, mwd, witm } = await getTxs(address, ethPrice);
+    const { totalFee, txCount, mwd, witm } = await getTxs(address, ethPrice, proxy);
     const { bridgeTo, bridgeFrom, volume, protocols, uniqueContracts } = await getTransfers(
       address,
       ethPrice,
+      proxy,
     );
     const { balances, total } = await getBalances(address);
     return {
@@ -28,13 +30,14 @@ export default async function getStarknet(address, ethPrice) {
   } catch (e) {
     console.log('error: ', e);
     return {
-      balances: { ETH: '-' },
+      balances: { ETH: '-', WETH: '-', USDC: '-', USDT: '-' },
       txCount: '-',
-      totalFee: '-',
+      totalFee: 0,
+      totalBalance: 0,
       mwd: '-',
       bridgeFrom: '-',
       bridgeTo: '-',
-      volume: '-',
+      volume: 0,
       witm: '-',
       protocols: {},
       result: false,

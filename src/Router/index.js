@@ -5,6 +5,7 @@ import Zksync from '@pages/Zksync/Zksync';
 import Aptos from '@pages/Aptos/Aptos';
 import Starknet from '@pages/Starknet/Starknet';
 import ScrollToTop from '../components/ScrollTop/ScrollTop';
+import Home from '../pages/Home/Home';
 
 const Root = () => {
   useEffect(() => {
@@ -29,6 +30,10 @@ export const router = createHashRouter([
     path: '/',
     element: <Root />,
     children: [
+      {
+        path: '/',
+        element: <Home />,
+      },
       {
         path: 'aptos',
         element: <Aptos />,

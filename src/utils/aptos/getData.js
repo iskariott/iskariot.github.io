@@ -17,7 +17,7 @@ export const getBalances = async (address, aptPrice) => {
         }
       }
     });
-    return { balances, total: '$' + total.toFixed(2) };
+    return { balances, total: total };
   } catch (e) {
     throw e;
   }
@@ -44,7 +44,7 @@ export const getTxs = async (address, aptPrice) => {
     });
     return {
       mwd: uniqueMonths.size + '/' + uniqueWeeks.size + '/' + uniqueDays.size,
-      totalFee: '$' + (totalFee * aptPrice).toFixed(2),
+      totalFee: totalFee * aptPrice,
       witm: witm.size,
       txsCount: txsData.length,
     };

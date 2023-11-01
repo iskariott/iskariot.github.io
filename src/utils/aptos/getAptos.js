@@ -6,7 +6,6 @@ export default async function getAptos(address, aptPrice) {
     const { balances, total } = await getBalances(address, aptPrice);
     return {
       totalBalance: total,
-      // balances: balances,
       APT: balances.APT || 0,
       USDT: balances.USDT || 0,
       USDC: balances.USDC || 0,
@@ -18,10 +17,10 @@ export default async function getAptos(address, aptPrice) {
     };
   } catch (e) {
     return {
-      balances: { APT: '-', USDC: '-', USDT: '-', DAI: '-' },
-      totalBalance: '-',
+      balances: { APT: '-', USDC: '-', USDT: '-' },
+      totalBalance: 0,
       txCount: '-',
-      totalFee: '-',
+      totalFee: 0,
       mwd: '-',
       witm: '-',
       result: false,

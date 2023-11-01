@@ -15,7 +15,12 @@ export default function ScrollToTop() {
   return (
     <Zoom in={trigger}>
       <Box role="presentation" className={st.box}>
-        <Fab onClick={scrollToTop} size="small" aria-label="Scroll back to top" className={st.fab}>
+        <Fab
+          onClick={scrollToTop}
+          size="small"
+          aria-label="Scroll back to top"
+          className={st.fab}
+          sx={{ bgcolor: '#1a2229', ':hover': { bgcolor: '#25313b' } }}>
           <KeyboardArrowUp fontSize="medium" sx={{ color: 'white' }} />
         </Fab>
       </Box>

@@ -7,6 +7,7 @@ import StButton from '@components/StButton/StButton';
 import updateAll from '@utils/starknet/updateAll';
 import updateCurrent from '@utils/starknet/updateCurrent';
 import { Columns } from '@utils/starknet/constants';
+import LoadProgress from '@components/Loader/Loader';
 
 function StarkManageWallets({ isModalOpen, setModal }) {
   const [inputData, setInputData] = useState('');
@@ -37,7 +38,7 @@ function StarkManageWallets({ isModalOpen, setModal }) {
 }
 
 function StarkTable() {
-  const rows = useSelector((state) => state.red.table.data.stark);
+  const rows = useSelector((state) => state.red.table.data.stark.wal);
   const Comp = () =>
     rows.length ? <WalletsTable rows={rows} updateAddr={updateCurrent} columns={Columns} /> : <></>;
   return <Comp />;
@@ -52,11 +53,12 @@ export default function Starknet() {
       <StButton sx={{ mb: 1, mr: 2 }} onClick={() => setModal(true)}>
         manage wallets
       </StButton>
-      <StButton sx={{ mb: 1 }} onClick={() => updateAll(dispatch, input)}>
+      <StButton sx={{ mb: 1, mr: 2 }} onClick={() => updateAll(dispatch, input)}>
         update
       </StButton>
       <StarkManageWallets isModalOpen={isModalOpen} setModal={setModal} />
       <StarkTable />
+      <LoadProgress />
     </>
   );
 }

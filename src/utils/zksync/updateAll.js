@@ -1,16 +1,8 @@
 import getZksync from './getZksync';
 import { clearZkTable, setZkTable } from '@redux/tableSlice';
-import { getTokensPrice } from '../common';
+import { formatInputData, getTokensPrice } from '../common';
 import { Tokens } from '../constants';
-
-const formatInputData = (input) => {
-  return input.split(/\r?\n/).flatMap((itm) => {
-    const tmp = itm.trim().split(' ');
-    if (!tmp[0] && !tmp[1]) return [];
-    else if (tmp[0].slice(0, 2) === '0x') return { label: '', address: tmp[0] };
-    else return { label: tmp[0], address: tmp[1] };
-  });
-};
+import { incrementLoadedCount, setLoaded, setLoading } from '@redux/loadSlice';
 
 export default async function updateAll(dispatch, input) {
   if (!input) return;
@@ -19,23 +11,26 @@ export default async function updateAll(dispatch, input) {
   const formatedInput = formatInputData(input);
   let allWalletsBalance = 0;
   let allWalletsFee = 0;
+  const data = [];
+  dispatch(setLoading(formatedInput.length));
   for (let i = 0; i < formatedInput.length; i++) {
+    dispatch(incrementLoadedCount());
     const resp = await getZksync(formatedInput[i].address, ethPrice);
     allWalletsBalance += resp.totalBalance;
     allWalletsFee += resp.totalFee;
-    const data = {
+    data.push({
       id: i,
       label: formatedInput[i].label,
-      // totalBalance: resp.totalBalance,
+      totalBalance: resp.totalBalance,
       // balances: resp.balances,
       ETH: resp.ETH,
       WETH: resp.WETH,
       USDC: resp.USDC,
       USDT: resp.USDT,
       'bridge to/from': resp.bridgeTo + '/' + resp.bridgeFrom,
-      volume: resp.volume,
+      volume: '$' + resp.volume.toFixed(2),
       txsCount: resp.txCount,
-      totalFee: resp.totalFee,
+      totalFee: '$' + resp.totalFee.toFixed(2),
       mwd: resp.mwd,
       witm: resp.witm,
       uniqueContracts: resp.uniqueContracts,
@@ -44,7 +39,13 @@ export default async function updateAll(dispatch, input) {
       transactions: resp.transactions,
       lite: resp.lite,
       result: resp.result,
-    };
-    dispatch(setZkTable(data));
+    });
   }
+  dispatch(
+    setZkTable({
+      wal: data,
+      total: { wallets: formatedInput.length, gas: allWalletsFee, balance: allWalletsBalance },
+    }),
+  );
+  dispatch(setLoaded());
 }

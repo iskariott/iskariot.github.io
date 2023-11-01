@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+export const timer = (ms) => new Promise((res) => setTimeout(res, ms));
+
 export async function getTokensPrice(token) {
   const url = `https://api.coingecko.com/api/v3/simple/price?ids=${token}&vs_currencies=usd`;
   try {
@@ -10,6 +12,15 @@ export async function getTokensPrice(token) {
     throw e;
   }
 }
+
+export const formatInputData = (input) => {
+  return input.split(/\r?\n/).flatMap((itm) => {
+    const tmp = itm.trim().split(' ');
+    if (!tmp[0] && !tmp[1]) return [];
+    else if (tmp[0].slice(0, 2) === '0x') return { label: '', address: tmp[0] };
+    else return { label: tmp[0], address: tmp[1] };
+  });
+};
 
 export function formateTokenValue(value, decimal) {
   return parseFloat((parseInt(value) / 10 ** decimal).toFixed(4));

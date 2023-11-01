@@ -25,7 +25,7 @@ export const getBalances = async (address, ethPrice) => {
         }
       }
     });
-    return { balances, total: '$' + total.toFixed(2) };
+    return { balances, total: total };
   } catch (e) {
     throw e;
   }
@@ -66,7 +66,7 @@ export const getTransfers = async (address, ethPrice) => {
         }
       }
     }
-    return { bridgeTo, bridgeFrom, volume: '$' + volume.toFixed(0) };
+    return { bridgeTo, bridgeFrom, volume };
   } catch (e) {
     throw e;
   }
@@ -118,7 +118,7 @@ export const getTxs = async (address, ethPrice) => {
     });
 
     return {
-      totalFee: '$' + totalFee.toFixed(2),
+      totalFee: totalFee,
       txCount,
       uniqueContracts: uniqueContracts.size,
       mwd: uniqueMonths.size + '/' + uniqueWeeks.size + '/' + uniqueDays.size,

@@ -1,6 +1,6 @@
 import { getWeekOfMonth } from '../common';
 import { CONTRACTS, STABLES } from './constants';
-import { fetchBalances, fetchLite, fetchTransfers, fetchTxs } from './fetchData';
+import { fetchBalances, fetchTransfers, fetchTxs } from './fetchData';
 
 export const getBalances = async (address) => {
   try {
@@ -11,7 +11,7 @@ export const getBalances = async (address) => {
       balances[itm.symbol] = itm.usdFormattedBalance;
       total += Number(itm.usdBalance);
     });
-    return { balances, total: '$' + total.toFixed(2) };
+    return { balances, total: total };
   } catch (e) {
     throw e;
   }
@@ -66,7 +66,7 @@ export const getTransfers = async (address, ethPrice) => {
     return {
       bridgeTo,
       bridgeFrom,
-      volume: '$' + volume.toFixed(2),
+      volume: volume,
       protocols,
       uniqueContracts: uniqueContracts.size,
     };
@@ -99,7 +99,7 @@ export const getTxs = async (address, ethPrice) => {
     });
 
     return {
-      totalFee: '$' + totalFee.toFixed(2),
+      totalFee: totalFee,
       txCount,
       mwd: uniqueMonths.size + '/' + uniqueWeeks.size + '/' + uniqueDays.size,
       witm: uniqueWeeksInCurMonth.size,

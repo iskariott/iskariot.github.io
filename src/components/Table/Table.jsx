@@ -49,7 +49,6 @@ export default function WalletsTable({ rows, updateAddr, columns, AdditInfo }) {
           </TableBody>
         </Table>
       </TableContainer>
-      {/* {!loadingData.loading ? <></> : <Loader loadingData={loadingData} />} */}
     </div>
   );
 }

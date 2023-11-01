@@ -6,9 +6,9 @@ import WalletsTable from '@components/Table/Table';
 import StButton from '@components/StButton/StButton';
 import updateAll from '@utils/zksync/updateAll';
 import updateCurrent from '@utils/zksync/updateCurrent';
-import { Box } from '@mui/material';
 import { Columns } from '@utils/zksync/constants';
 import AdditInfo from './AdditInfo';
+import LoadProgress from '@components/Loader/Loader';
 
 function ZkManageWallets({ isModalOpen, setModal }) {
   const [inputData, setInputData] = useState('');
@@ -39,7 +39,7 @@ function ZkManageWallets({ isModalOpen, setModal }) {
 }
 
 function ZkTable() {
-  const rows = useSelector((state) => state.red.table.data.zk);
+  const rows = useSelector((state) => state.red.table.data.zk.wal);
   const Comp = () =>
     rows.length ? (
       <WalletsTable
@@ -68,6 +68,7 @@ export default function Zksync() {
       </StButton>
       <ZkManageWallets isModalOpen={isModalOpen} setModal={setModal} />
       <ZkTable />
+      <LoadProgress />
     </>
   );
 }

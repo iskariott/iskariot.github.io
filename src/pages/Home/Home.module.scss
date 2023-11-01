@@ -1,0 +1,40 @@
+.wrapper {
+  width: 100%;
+  height: calc(100vh - 60px);
+}
+
+.wrapper2 {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: whitesmoke;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+  width: 25%;
+  height: 110px;
+  border-radius: 20px;
+  background-color: #1a2229;
+  padding: 15px;
+  font-size: 17px;
+
+  .head {
+    font-size: 20px;
+    padding-bottom: 2px;
+    border-bottom: 2px solid #232e38;
+    text-align: center;
+  }
+
+  .text {
+    margin-left: 5px;
+    color: green;
+  }
+}
