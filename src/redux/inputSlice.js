@@ -15,9 +15,14 @@ export const inputSlice = createSlice({
     setStarkInput: (state, actions) => {
       state.data.stark = actions.payload;
     },
+
+    //-----------------------------------
+    resetInput: (state) => {
+      state.data = { apt: '', zk: '', stark: '' };
+    },
   },
 });
 
-export const { setAptInput, setZkInput, setStarkInput } = inputSlice.actions;
+export const { setAptInput, setZkInput, setStarkInput, resetInput } = inputSlice.actions;
 
 export default inputSlice.reducer;

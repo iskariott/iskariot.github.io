@@ -4,15 +4,21 @@ import Header from '@components/Header/Header';
 import Zksync from '@pages/Zksync/Zksync';
 import Aptos from '@pages/Aptos/Aptos';
 import Starknet from '@pages/Starknet/Starknet';
-import ScrollToTop from '../components/ScrollTop/ScrollTop';
-import Home from '../pages/Home/Home';
+import ScrollToTop from '@components/ScrollTop/ScrollTop';
+import Home from '@pages/Home/Home';
+import { useDispatch } from 'react-redux';
+import { resetInput } from '@redux/inputSlice';
+import { resetTable } from '@redux/tableSlice';
 
 const Root = () => {
+  const dispatch = useDispatch();
   useEffect(() => {
-    const currentVersion = '1.4';
+    const currentVersion = '1.5';
     const storedVersion = localStorage.getItem('ver');
     if (storedVersion !== currentVersion) {
       localStorage.clear();
+      dispatch(resetInput());
+      dispatch(resetTable());
       localStorage.setItem('ver', currentVersion);
     }
   }, []);

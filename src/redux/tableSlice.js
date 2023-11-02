@@ -64,6 +64,15 @@ export const tableSlice = createSlice({
     clearStarkTable: (state) => {
       state.data.stark = { wal: [], total: {} };
     },
+
+    //-----------------------------------------
+    resetTable: (state) => {
+      state.data = {
+        apt: { wal: [], total: {} },
+        zk: { wal: [], total: {} },
+        stark: { wal: [], total: {} },
+      };
+    },
   },
 });
 
@@ -77,6 +86,9 @@ export const {
   setStarkTable,
   updateStarkTable,
   clearStarkTable,
+
+  // ------------------
+  resetTable,
 } = tableSlice.actions;
 
 export default tableSlice.reducer;
